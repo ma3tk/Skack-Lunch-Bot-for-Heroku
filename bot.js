@@ -63,15 +63,27 @@ controller.hears(['random'], 'direct_message,direct_mention,mention', function (
 
     bot.reply(message, '今日のランチを適当に決めますね！:grin:');
 
+    var fs = require('fs');
+    var csv = require('csv');
+    var filename = 'restaurant_data.csv';
+
     var parser = csv.parse({columns: ['name', 'genre', 'url']});
 
-    parser.on('readable', function () {
+    var list = [];
+
+    parser.on('readable', function() {
         var data;
         while (data = parser.read()) {
-            console.log(data);
-            bot.reply(message, data);
+            list.push(data);
         }
     });
+
+    parser.on('end', function () {
+        console.log(list);
+        bot.reply(message, list[0]);
+    });
+
+    fs.createReadStream(filename).pipe(parser);
 
 });
 
