@@ -17,6 +17,8 @@ if (!process.env.token) {
 
 var Botkit = require('botkit');
 var os = require('os');
+var csv = require('csv');
+var filename = 'restaurant_data.csv';
 
 var controller = Botkit.slackbot({
     debug: true,
@@ -56,6 +58,23 @@ controller.hears(['挨拶', 'こんにちは', 'Bot', 'あなた', '誰', 'だ�
 //=========================================================
 // 質問形式の会話
 //=========================================================
+
+controller.hears(['random'], 'direct_message,direct_mention,mention', function (bot, message) {
+
+    bot.reply(message, '今日のランチを適当に決めますね！:grin:');
+
+    var parser = csv.parse({columns: ['name', 'genre', 'url']});
+
+    parser.on('readable', function () {
+        var data;
+        while (data = parser.read()) {
+            console.log(data);
+            bot.reply(message, data);
+        }
+    });
+
+});
+
 
 controller.hears(['ラーメン'], 'direct_message,direct_mention,mention', function (bot, message) {
 
