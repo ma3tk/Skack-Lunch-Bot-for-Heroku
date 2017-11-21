@@ -81,7 +81,8 @@ controller.hears(['random'], 'direct_message,direct_mention,mention', function (
 
     parser.on('end', function () {
         console.log(list);
-        bot.reply(message, list[0]);
+        var seed = Math.floor(Math.random() * list.length);
+        bot.reply(message, '今日は、 ' + list[seed][0] + ' に行きませんか？ ( ' + list[seed][2] + ' )');
     });
 
     fs.createReadStream(filename).pipe(parser);
