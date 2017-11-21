@@ -67,7 +67,8 @@ controller.hears(['random'], 'direct_message,direct_mention,mention', function (
     var csv = require('csv');
     var filename = 'restaurant_data.csv';
 
-    var parser = csv.parse({columns: ['name', 'genre', 'url']});
+    //var parser = csv.parse({columns: ['name', 'genre', 'url']});
+    var parser = csv.parse({trim: true});
 
     var list = [];
 
