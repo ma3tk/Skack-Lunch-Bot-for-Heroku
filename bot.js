@@ -54,35 +54,32 @@ controller.hears(['挨拶', 'こんにちは', 'Bot', 'あなた', '誰', 'だ�
 
 });
 
-
-
 //=========================================================
 // 質問形式の会話
 //=========================================================
 
-controller.hears(['random'], 'direct_message,direct_mention,mention', function (bot, message) {
+controller.hears(['shashoku-shout'], 'direct_message,direct_mention,mention', function (bot, message) {
 
-    bot.reply(message, '今日のランチを適当に決めるけどいい？:grin:');
+    var shoutList = [
+        'サァバー・ナカオチー！！！',
+        'ナンメェー？',
+        'チュウモンドウゾー！！！',
+        'ヘァアアアァァイ！アジフラーーイ！！！！！',
+        'キテナイノアタライッテクダサーイ！！！',
+        'ども、ども、ありがとうございます！！！！',
+        'ハァァァイ！！！！',
+        'マグロフラーイ！！！！！！',
+        'イッピンハー！！？？？？',
+        'ゴハンモテクルカラチョトマテクダサイ！！！',
+        'サバ・中落ちで！ → サンマ・メゴチーーー！！！！',
+        'スグカタヅケルカラモウチョットマッテネ！！！！！'
+    ];
 
-    var parser = csv.parse({trim: true});
-    var list = [];
-
-    parser.on('readable', function() {
-        var data;
-        while (data = parser.read()) {
-            list.push(data);
-        }
-    });
-
-    parser.on('end', function () {
-        var seed = Math.floor(Math.random() * list.length);
-        bot.reply(message, '今日は、 ' + list[seed][0] + ' どう？ ( ' + list[seed][2] + ' )');
-    });
-
-    fs.createReadStream(filename).pipe(parser);
+    var shoutSeed = Math.floor(Math.random() * shoutList.length);
+    bot.reply(message, shoutList[shoutSeed]);
 });
 
-controller.hears(['shashoku'], 'direct_message,direct_mention,mention',  custom_hear_middleware, function (bot, message) {
+controller.hears(['shashoku'], 'direct_message,direct_mention,mention', function (bot, message) {
 
     bot.reply(message, '今日の社食で何食べるか決めるね！:star:');
 
@@ -187,27 +184,27 @@ controller.hears(['shashoku'], 'direct_message,direct_mention,mention',  custom_
     );
 });
 
-controller.hears(['shashoku-shout'], 'direct_message,direct_mention,mention', function (bot, message) {
+controller.hears(['random'], 'direct_message,direct_mention,mention', function (bot, message) {
 
-    var shoutList = [
-        'サァバー・ナカオチー！！！',
-        'ナンメェー？',
-        'チュウモンドウゾー！！！',
-        'ヘァアアアァァイ！アジフラーーイ！！！！！',
-        'キテナイノアタライッテクダサーイ！！！',
-        'ども、ども、ありがとうございます！！！！',
-        'ハァァァイ！！！！',
-        'マグロフラーイ！！！！！！',
-        'イッピンハー！！？？？？',
-        'ゴハンモテクルカラチョトマテクダサイ！！！',
-        'サバ・中落ちで！ → サンマ・メゴチーーー！！！！',
-        'スグカタヅケルカラモウチョットマッテネ！！！！！'
-    ];
+    bot.reply(message, '今日のランチを適当に決めるけどいい？:grin:');
 
-    var shoutSeed = Math.floor(Math.random() * shoutList.length);
-    bot.reply(message, shoutList[shoutSeed]);
+    var parser = csv.parse({trim: true});
+    var list = [];
+
+    parser.on('readable', function() {
+        var data;
+        while (data = parser.read()) {
+            list.push(data);
+        }
+    });
+
+    parser.on('end', function () {
+        var seed = Math.floor(Math.random() * list.length);
+        bot.reply(message, '今日は、 ' + list[seed][0] + ' どう？ ( ' + list[seed][2] + ' )');
+    });
+
+    fs.createReadStream(filename).pipe(parser);
 });
-
 
 //=========================================================
 // 名前を覚える(データを保存する)
@@ -309,16 +306,3 @@ controller.hears(['(.*)'], 'direct_message,direct_mention,mention', function (bo
         }
     });
 });
-
-/**
- * Middleware to match exact commands
- */
-function custom_hear_middleware(patterns, message) {
-
-    for (var p = 0; p < patterns.length; p++) {
-        if (patterns[p] === message.text) {
-            return true;
-        }
-    }
-    return false;
-}
