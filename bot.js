@@ -82,7 +82,7 @@ controller.hears(['random'], 'direct_message,direct_mention,mention', function (
     fs.createReadStream(filename).pipe(parser);
 });
 
-controller.hears(['shashoku'], 'direct_message,direct_mention,mention', function (bot, message) {
+controller.hears([/shashoku/g], 'direct_message,direct_mention,mention', function (bot, message) {
 
     bot.reply(message, '今日の社食で何食べるか決めるね！:star:');
 
