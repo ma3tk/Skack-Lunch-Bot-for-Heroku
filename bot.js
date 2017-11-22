@@ -87,7 +87,7 @@ controller.hears(['shashoku'], 'direct_message,direct_mention,mention', function
     bot.reply(message, '今日の社食で何食べるか決めるね！:star:');
 
     var menu = {
-        "main": [
+        'main': [
             {
                 'type': 'grilled-fish',
                 'name': 'さば塩焼き'
@@ -149,7 +149,7 @@ controller.hears(['shashoku'], 'direct_message,direct_mention,mention', function
                 'name': '揚げシュウマイ'
             }
         ],
-        "sub": [
+        'sub': [
             '五目ひじき',
             '切干大根煮',
             '焼のり・生玉子',
@@ -165,20 +165,26 @@ controller.hears(['shashoku'], 'direct_message,direct_mention,mention', function
         ]
     };
 
-    console.log(menu.main);
-    var seed1 = Math.floor(Math.random() * menu.main.length);
-    var seed2 = Math.floor(Math.random() * menu.main.length);
+    var main_seed1 = Math.floor(Math.random() * menu.main.length);
+    var main_seed2 = Math.floor(Math.random() * menu.main.length);
     for (var i = 0; i < 10; i++) {
-        if (seed1 !== seed2) {
+        if (main_seed1 !== main_seed2) {
             break;
         }
-        seed2 = Math.floor(Math.random() * menu.main.length);
+        main_seed2 = Math.floor(Math.random() * menu.main.length);
     }
 
-    var seed3 = Math.floor(Math.random() * menu.sub.length);
+    var main_seed = Math.floor(Math.random() * menu.sub.length);
 
-    bot.reply(message, '今日は、 ' + menu.main[seed1]['name'] + ' 、' + menu.main[seed2]['name'] +  ' 、 ' + menu.sub[seed3] + ' で注文してみるのはどう？');
-
+    bot.reply(message,
+        '今日は、 ' +
+        menu.main[main_seed1]['name'] +
+        ' 、' +
+        menu.main[main_seed2]['name'] +
+        ' 、 ' +
+        menu.sub[main_seed] +
+        ' で注文してみるのはどう？'
+    );
 });
 
 
