@@ -82,7 +82,7 @@ controller.hears(['random'], 'direct_message,direct_mention,mention', function (
     fs.createReadStream(filename).pipe(parser);
 });
 
-controller.hears(['shashoku random'], 'direct_message,direct_mention,mention', function (bot, message) {
+controller.hears(['shashoku'], 'direct_message,direct_mention,mention', function (bot, message) {
 
     bot.reply(message, '今日の社食で何食べるか決めるね！:star:');
 
@@ -174,7 +174,7 @@ controller.hears(['shashoku random'], 'direct_message,direct_mention,mention', f
         }
         seed2 = Math.floor(Math.random() * menu.main.length);
     }
-    
+
     var seed3 = Math.floor(Math.random() * menu.sub.length);
 
     bot.reply(message, '今日は、 ' + menu.main[seed1] + ' 、' + menu.main[seed2] +  ' 、 ' + menu.sub[seed3] + ' で注文してみるのはどう？');
