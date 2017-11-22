@@ -82,7 +82,7 @@ controller.hears(['random'], 'direct_message,direct_mention,mention', function (
     fs.createReadStream(filename).pipe(parser);
 });
 
-controller.hears([/shashoku/g], 'direct_message,direct_mention,mention', function (bot, message) {
+controller.hears([/shashoku/g], 'direct_message,direct_mention,mention',  custom_hear_middleware, function (bot, message) {
 
     bot.reply(message, '今日の社食で何食べるか決めるね！:star:');
 
@@ -309,3 +309,16 @@ controller.hears(['(.*)'], 'direct_message,direct_mention,mention', function (bo
         }
     });
 });
+
+/**
+ * Middleware to match exact commands
+ */
+function custom_hear_middleware(patterns, message) {
+
+    for (var p = 0; p < patterns.length; p++) {
+        if (patterns[p] === message.text) {
+            return true;
+        }
+    }
+    return false;
+}
