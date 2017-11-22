@@ -17,6 +17,7 @@ if (!process.env.token) {
 
 var Botkit = require('botkit');
 var os = require('os');
+var fs = require('fs');
 var csv = require('csv');
 var filename = 'restaurant_data.csv';
 
@@ -61,15 +62,9 @@ controller.hears(['挨拶', 'こんにちは', 'Bot', 'あなた', '誰', 'だ�
 
 controller.hears(['random'], 'direct_message,direct_mention,mention', function (bot, message) {
 
-    bot.reply(message, '今日のランチを適当に決めますね！:grin:');
+    bot.reply(message, '今日のランチを適当に決めるけどいい？:grin:');
 
-    var fs = require('fs');
-    var csv = require('csv');
-    var filename = 'restaurant_data.csv';
-
-    //var parser = csv.parse({columns: ['name', 'genre', 'url']});
     var parser = csv.parse({trim: true});
-
     var list = [];
 
     parser.on('readable', function() {
@@ -80,12 +75,109 @@ controller.hears(['random'], 'direct_message,direct_mention,mention', function (
     });
 
     parser.on('end', function () {
-        console.log(list);
         var seed = Math.floor(Math.random() * list.length);
-        bot.reply(message, '今日は、 ' + list[seed][0] + ' に行きませんか？ ( ' + list[seed][2] + ' )');
+        bot.reply(message, '今日は、 ' + list[seed][0] + ' どう？ ( ' + list[seed][2] + ' )');
     });
 
     fs.createReadStream(filename).pipe(parser);
+});
+
+controller.hears(['shashoku random'], 'direct_message,direct_mention,mention', function (bot, message) {
+
+    bot.reply(message, '今日の社食で何食べるか決めるね！:star:');
+
+    var menu = {
+        "main": [
+            {
+                'type': 'grilled-fish',
+                'name': 'さば塩焼き'
+            },
+            {
+                'type': 'grilled-fish',
+                'name': 'さんま塩焼き'
+            },
+            {
+                'type': 'raw-fish',
+                'name': 'まぐろぶつ'
+            },
+            {
+                'type': 'raw-fish',
+                'name': '中おち'
+            },
+            {
+                'type': 'raw-fish',
+                'name': 'はまち刺'
+            },
+            {
+                'type': 'fried-fish',
+                'name': '日替わりフライ'
+            },
+            {
+                'type': 'fried-fish',
+                'name': 'あじフライ'
+            },
+            {
+                'type': 'fried-fish',
+                'name': 'キスフライ'
+            },
+            {
+                'type': 'fried-fish',
+                'name': 'イカフライ'
+            },
+            {
+                'type': 'fried-fish',
+                'name': 'えびフライ'
+            },
+            {
+                'type': 'others',
+                'name': '串カツ'
+            },
+            {
+                'type': 'others',
+                'name': 'ハムカツ'
+            },
+            {
+                'type': 'others',
+                'name': 'メンチカツ'
+            },
+            {
+                'type': 'others',
+                'name': 'ハンバーグ'
+            },
+            {
+                'type': 'others',
+                'name': '揚げシュウマイ'
+            }
+        ],
+        "sub": [
+            '五目ひじき',
+            '切干大根煮',
+            '焼のり・生玉子',
+            '焼のり・梅干',
+            '生玉子・梅干',
+            'ポテトサラダ',
+            'しらすおろし',
+            '明太子',
+            'とろろ',
+            'めかぶ',
+            '納豆',
+            '冷奴'
+        ]
+    };
+
+    console.log(menu.main);
+    var seed1 = Math.floor(Math.random() * menu.main.length);
+    var seed2 = Math.floor(Math.random() * menu.main.length);
+    for (var i = 0; i < 10; i++) {
+        if (seed1 !== seed2) {
+            break;
+        }
+        seed2 = Math.floor(Math.random() * menu.main.length);
+    }
+    
+    var seed3 = Math.floor(Math.random() * menu.sub.length);
+
+    bot.reply(message, '今日は、 ' + menu.main[seed1] + ' 、' + menu.main[seed2] +  ' 、 ' + menu.sub[seed3] + ' で注文してみるのはどう？');
 
 });
 
