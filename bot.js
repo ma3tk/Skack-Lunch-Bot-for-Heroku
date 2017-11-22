@@ -177,7 +177,7 @@ controller.hears(['shashoku'], 'direct_message,direct_mention,mention', function
 
     var seed3 = Math.floor(Math.random() * menu.sub.length);
 
-    bot.reply(message, '今日は、 ' + menu.main[seed1] + ' 、' + menu.main[seed2] +  ' 、 ' + menu.sub[seed3] + ' で注文してみるのはどう？');
+    bot.reply(message, '今日は、 ' + menu.main[seed1]['name'] + ' 、' + menu.main[seed2]['name'] +  ' 、 ' + menu.sub[seed3] + ' で注文してみるのはどう？');
 
 });
 
