@@ -187,6 +187,27 @@ controller.hears(['shashoku'], 'direct_message,direct_mention,mention', function
     );
 });
 
+controller.hears(['shashoku-shout'], 'direct_message,direct_mention,mention', function (bot, message) {
+
+    var shoutList = [
+        'サァバー・ナカオチー！！！',
+        'ナンメェー？',
+        'チュウモンドウゾー！！！',
+        'ヘァアアアァァイ！アジフラーーイ！！！！！',
+        'キテナイノアタライッテクダサーイ！！！',
+        'ども、ども、ありがとうございます！！！！',
+        'ハァァァイ！！！！',
+        'マグロフラーイ！！！！！！',
+        'イッピンハー！！？？？？',
+        'ゴハンモテクルカラチョトマテクダサイ！！！',
+        'サバ・中落ちで！ → サンマ・メゴチーーー！！！！',
+        'スグカタヅケルカラモウチョットマッテネ！！！！！'
+    ];
+
+    var shoutSeed = Math.floor(Math.random() * shoutList.length);
+    bot.reply(message, shoutList[shoutSeed]);
+});
+
 
 //=========================================================
 // 名前を覚える(データを保存する)
