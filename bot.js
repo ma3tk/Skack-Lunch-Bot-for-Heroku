@@ -85,21 +85,22 @@ controller.hears(['ラーメン'], 'direct_message,direct_mention,mention', func
     })	
 });
 
-controller.hears(['tagashira-shout'], 'direct_message,direct_mention,mention', function (bot, message) {
+controller.hears(['murata-help'], 'direct_message,direct_mention,mention', function (bot, message) {
 
     var shoutList = [
-        '松岡すわぁーーーーーーーん！！！',
-        'あがるぅーーーーーーーーー！！！',
-        'かわうぃ〜〜〜〜〜〜〜〜〜〜',
-        'めっちゃいいすねっ！！！！！！！！！',
-        'ぺーーーーーーーーーい',
-        'げほげほげほえほえほえほえ',
-        '相模原！！！！！！！！！！！！',
-        'ドリコムではゲームプロデューサーやってましたーーーーー！',
-        'お金がありません！！！！！！！！！',
-        'お金借りていいですかーーーーーーー？',
-        '植木さーーーーーーーーーーーーん',
-        'カーテンがありません！！！！！！！'
+        '東京帰ったらベルギーチョコレートまくね！',
+        'ベルフェイスちゃんと使っていこう！',
+        'セールスフォースの導入ちゃんと進んでる？',
+        'オンボーディングが一番大事なんだよな',
+        '物産では友達いなかったんだよな',
+        'スパーズは選手の身体がとても重い',
+        '水を売ることにしました！',
+        'どうやったらクライアントをサクセスできるか考えよう！',
+        'ボラティリティ高いな！',
+        '山田さんにエスカレーションしていこう！',
+        '最初の仕事は与信管理と債権回収だったよ',
+        'とりあえずUSA（カラオケ）いこう！'
+     　　'ありがとう、いい薬です'
     ];
 
     var shoutSeed = Math.floor(Math.random() * shoutList.length);
