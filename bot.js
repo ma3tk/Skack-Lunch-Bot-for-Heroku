@@ -47,7 +47,7 @@ var bot = controller.spawn({
 controller.hears(['挨拶', 'こんにちは', 'Bot', 'あなた', '誰', 'だれ', '自己紹介'], 'direct_message,direct_mention,mention', function (bot, message) {
 
     // bot.reply()で、botに発言をさせます。
-    bot.reply(message, 'こんにちは！私は *Botkit製のBot* です！ \n _いろんな事ができますよ！_ :smiley:');
+    bot.reply(message, 'こんばんわ！私は *Botkit製のBot* です！ \n _いろんな事ができますよ！_ :smiley:');
 
 });
 
