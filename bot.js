@@ -85,6 +85,27 @@ controller.hears(['ラーメン'], 'direct_message,direct_mention,mention', func
     })	
 });
 
+controller.hears(['tagashira-shout'], 'direct_message,direct_mention,mention', function (bot, message) {
+
+    var shoutList = [
+        '松岡すわぁーーーーーーーん！！！',
+        'あがるぅーーーーーーーーー！！！',
+        'かわうぃ〜〜〜〜〜〜〜〜〜〜',
+        'めっちゃいいすねっ！！！！！！！！！',
+        'ぺーーーーーーーーーい',
+        'げほげほげほえほえほえほえ（ぜんそく）',
+        '相模原！！！！！！！！！！！！',
+        'ドリコムではゲームプロデューサーやってましたーーーーー！',
+        'お金がありません！！！！！！！！！',
+        'お金借りていいですかーーーーーーー？',
+        '植木さーーーーーーーーーーーーん',
+        'カーテンがありません！！！！！！！'
+    ];
+
+    var shoutSeed = Math.floor(Math.random() * shoutList.length);
+    bot.reply(message, shoutList[shoutSeed]);
+});
+
 //=========================================================
 // 質問形式の会話
 //=========================================================
