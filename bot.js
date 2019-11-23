@@ -99,7 +99,7 @@ controller.hears(['murata-help'], 'direct_message,direct_mention,mention', funct
         'ボラティリティ高いな！',
         '山田さんにエスカレーションしていこう！',
         '最初の仕事は与信管理と債権回収だったよ',
-        'とりあえずUSA（カラオケ）いこう！'
+        'とりあえずUSA（カラオケ）いこう！',
      　　'ありがとう、いい薬です'
     ];
 
